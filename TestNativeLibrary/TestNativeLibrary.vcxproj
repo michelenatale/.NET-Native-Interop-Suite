@@ -24,6 +24,14 @@
     <ProjectGuid>{a9efcc29-0458-4851-b303-8a513c834ceb}</ProjectGuid>
     <RootNamespace>TestNativeLibrary</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+
+    <Authors>© Michele Natale 2026</Authors>
+    <Product>© TestNativeLibrary 2026</Product>
+    <Company>© Michele Natale 2026</Company>
+    <Description>
+      Language Interoperability (LanguageInteroperability) for DotNet with P/Invoke, LibraryImport, NativeAOT. Once from C# → C and once from C → C#.
+    </Description>
+    <Copyright>© TestNativeLibrary 2026 - created by © Michele Natale 2026</Copyright>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

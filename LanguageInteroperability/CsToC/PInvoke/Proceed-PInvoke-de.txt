@@ -32,6 +32,3 @@ Für einen Debug-ähnlichen Build
 "cl /LD /Zi /Od cadd.c /Fe:cadd.dll"
 ist jedoch eigentlich nicht notwendig, aber auch nicht falsch.
 
-
-
-

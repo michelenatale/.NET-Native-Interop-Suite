@@ -15,6 +15,31 @@
     <StripSymbols>true</StripSymbols>
     <Platforms>AnyCPU;x64</Platforms>
     <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+
+    <Authors>© Michele Natale 2026</Authors>
+    <Product>© NativeLibrary 2026</Product>
+    <Company>© Michele Natale 2026</Company>
+    <Description>
+      Language Interoperability (LanguageInteroperability) for DotNet with P/Invoke, LibraryImport, NativeAOT. Once from C# → C and once from C → C#.
+    </Description>
+    <Copyright>© NativeLibrary 2026 - created by © Michele Natale 2026</Copyright>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
