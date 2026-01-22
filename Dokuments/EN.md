@@ -1,5 +1,7 @@
 # Net-Language-Interoperability
 
+**[German-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Dokuments/GithubReadMe-DE.md)**
+
 Small, focused examples demonstrating how .NET (C#) interacts with native libraries (C/C++), using:
 
 - **P/Invoke**
