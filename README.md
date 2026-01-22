@@ -1,240 +1,317 @@
 # Net-Language-Interoperability
-LanguageInteroperability for DotNet
 
-A compact collection of small, focused examples and step‑by‑step guides that demonstrate how .NET (C#) interoperates with native libraries (C/C++). The repository contains multiple approaches: P/Invoke, LibraryImport, and NativeAOT, plus test harnesses and build instructions in English and German.
+Examples and explanations demonstrating how .NET (C#) interacts with native libraries (C/C++), focusing on:
 
-Short: Practical reference for .NET ↔ native C interoperability on Windows x64 using modern and classic techniques.
+- **P/Invoke**
+- **LibraryImport**
+- **NativeAOT**
+- **Interop from C# → C** and **from C → C#**
 
-Badges (optional)
-- Build / CI: (add when you enable GitHub Actions)
-- License: MIT (or your chosen license)
-
-Table of contents
-- Overview
-- Repository structure (files & projects)
-- Architecture diagrams (ASCII + Mermaid)
-- Projects: purpose, internals, relationships
-  - NativeLibrary
-  - LanguageInteroperability/CsToC
-    - LibraryImport
-    - NativeAOT
-  - TestLanguageInteroperability
-  - TestNativeLibrary
-- How the parts interact (technical)
-- Quickstart (Windows x64)
-- Build automation snippet (csproj)
-- Troubleshooting & tips
-- Suggested improvements & priorities
-- Contributing & license note
-- Summary / Conclusion
+The goal of this repository is to illustrate the underlying mechanisms clearly and understandably — not to provide a “perfect” framework, but small, focused building blocks.
 
 ---
 
-Overview
-========
-This repository demonstrates three common techniques to call native code from .NET and to expose .NET code as native exports:
+## Overview
 
-- P/Invoke (classic `DllImport`) — runtime binding to native DLLs.
-- LibraryImport (modern attribute/source-gen style) — lower-overhead imports and better interop ergonomics.
-- NativeAOT — compiling a .NET library into a native binary that can be consumed by native code or used like a native DLL.
+**Short (DE):**  
+Kompakte Beispiele für Interoperabilität zwischen .NET und nativen C‑Bibliotheken, mit Schwerpunkt auf Windows x64 und NativeAOT.
 
-The samples are intentionally small and practical: they show minimal, focused examples for learning and experimentation rather than a full product.
+**Short (EN):**  
+Small, focused examples for .NET ↔ native C interoperability (P/Invoke, LibraryImport, NativeAOT). Windows/x64 oriented.
 
-Repository structure (high-level)
-================================
-- NativeLibrary/
-  - .NET project demonstrating NativeAOT exports (Library.cs, NativeLibrary.csproj)
-  - Proceed-NativeLibrary-en.txt / Proceed-NativeLibrary-de.txt — step-by-step build instructions
-- LanguageInteroperability/CsToC/
-  - LibraryImport/
-    - crandom.c �� example native C implementation (random bytes)
-    - LibraryImport.cs — example C# using [LibraryImport]
-    - Proceed-LibraryImport-en.txt / -de.txt
-  - NativeAOT/
-    - instructions and helper files to create add_aot.dll that links to NativeLibrary.lib
-    - Proceed-NativeAOT-en.txt / -de.txt
-- TestLanguageInteroperability/
-  - Test harness (Program.cs) that runs P/Invoke, LibraryImport and NativeAOT examples
-- TestNativeLibrary/
-  - Native-side test harness and build helpers (pch.h etc.)
-- Proceed-*.txt (EN / DE) — many how-to documents scattered across folders
-- WhatCanBeDeleted.txt — list of build artifacts that can be removed
-- LICENSE — currently present; you plan to change it to MIT
+---
 
-Architecture diagrams
-=====================
+## Table of Contents
 
-ASCII overview (simple)
------------------------
-LanguageInteroperability (C#)                       NativeLibrary (C# NativeAOT)
-+-----------------------------+                    +----------------------+
-| TestLanguageInteroperability |  <---uses---       | NativeLibrary (AOT)  |
-| - CsToC.StartPInvoke()       |  <---P/Invoke-->   | - exports aot_add    |
-| - CsToC.StartLibraryImport() |  <---LibraryImport->| - NativeLibrary.lib  |
-| - CsToC.StartNativeAOT()     |  <---native dll--->| - aot_add.c          |
-+-----------------------------+                    +----------------------+
-            ^
-            |
-       builds / runs
-       (Windows x64)
+- [Goals of the Repository](#goals-of-the-repository)
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+- [Projects in Detail](#projects-in-detail)
+  - [NativeLibrary](#nativelibrary)
+  - [LanguageInteroperability/CsToC](#languageinteroperabilitycstoc)
+  - [TestLanguageInteroperability](#testlanguageinteroperability)
+  - [TestNativeLibrary](#testnativelibrary)
+- [How the Components Work Together](#how-the-components-work-together)
+- [Quickstart: Build & Run (Windows x64)](#quickstart-build--run-windows-x64)
+- [Troubleshooting & Tips](#troubleshooting--tips)
+- [Possible Extensions](#possible-extensions)
+- [License & Contributions](#license--contributions)
 
-Mermaid (rendered on platforms that support it)
-```mermaid
-flowchart LR
-  A[TestLanguageInteroperability C#] -->|P/Invoke| B[crandom.dll (native)]
-  A -->|LibraryImport| C[crandom.dll]
-  A -->|NativeAOT (published)| D[NativeLibrary native DLL]
-  D -->|provides| E[aot_add entry point]
+---
+
+## Goals of the Repository
+
+This repository aims to:
+
+- Demonstrate **interoperability mechanisms**, not provide a full framework.
+- Offer **small, concrete examples** that are easy to understand and adapt.
+- Highlight **common pitfalls** (paths, architecture, ABI, marshaling).
+- Serve as a **reference** for using P/Invoke, LibraryImport, or NativeAOT in your own projects.
+
+---
+
+## Architecture Overview
+
+### High-Level Picture
+
+- **C# → C**
+  - Classic P/Invoke (`DllImport`)
+  - Modern `LibraryImport` (source generator)
+- **C → C#**
+  - C# library compiled into a native DLL using **NativeAOT**
+  - C code links against the generated `.lib` and calls exported functions
+
+### ASCII Diagram
+
+```text
++-----------------------------------+
+| TestLanguageInteroperability (C#) |
+|                                   |
+|  - P/Invoke example               |
+|  - LibraryImport example          |
+|  - NativeAOT example              |
++-----------------+-----------------+
+                  |
+                  v
+        +---------------------+
+        |  NativeLibrary (C#) |
+        |  NativeAOT DLL      |
+        |  exports e.g.       |
+        |  aot_add            |
+        +---------------------+
+
+C# -> C:  P/Invoke / LibraryImport
+C  -> C#: NativeAOT + .lib + DLL exports
 ```
 
-Projects — purpose, internals and relations
-==========================================
+---
 
-NativeLibrary
-------------
-Purpose
-- Demonstrates how to export .NET methods as native entry points using NativeAOT.
+## Project Structure
 
-What it contains
-- Library.cs with methods marked by `[UnmanagedCallersOnly(EntryPoint="...")]` for direct exports (example: `aot_add`).
-- NativeLibrary.csproj with `<PublishAot>true</PublishAot>` and settings for AOT publishing.
+High-level structure:
 
-Why it exists
-- Produces native DLLs and `.lib` artifacts that can be linked into other native components. Useful when you want to expose .NET logic to native code with low runtime overhead.
+- `/NativeLibrary`  
+  NativeAOT example: C# project compiled into a native DLL (including `.lib`).
 
-Key technical notes
-- TargetFramework: `net10.0`.
-- Use `dotnet publish -c Release -r win-x64` to produce native artifacts.
-- Project sets `<DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>` to control marshaling behaviour; be explicit about parameter types.
+- `/LanguageInteroperability/CsToC`
+  - `/LibraryImport`  
+    C example (`crandom.c`) + C# code using the DLL via `LibraryImport`.
+  - `/NativeAOT`  
+    Instructions and files for building an additional native DLL (`add_aot.dll`) using `NativeLibrary.lib`.
 
-LanguageInteroperability/CsToC
-------------------------------
-Purpose
-- Collection of C# → C examples showing multiple interop styles.
+- `/TestLanguageInteroperability`  
+  C# console project executing all three approaches (P/Invoke, LibraryImport, NativeAOT).
 
-LibraryImport
-- Modern example using `[LibraryImport]` (source-gen style), with efficient usage of `Span<byte>` and `stackalloc` to avoid heap allocations.
-- Native part: `crandom.c` — small native routine to fill a buffer with random bytes; compiled to `crandom.dll`.
-- C# wrapper demonstrates `partial` extern declarations and calling patterns.
+- `/TestNativeLibrary`  
+  Native C/C++ test project linking against `NativeLibrary.lib` and calling exported functions.
 
-NativeAOT (in CsToC)
-- Shows how to produce `add_aot.dll` by linking against `NativeLibrary.lib` (produced by native AOT publish).
-- Demonstrates building a native wrapper (`add_aot.c`) that calls into AOT-produced exports.
+- `Proceed-*.txt`  
+  Step-by-step instructions (DE/EN).
 
-TestLanguageInteroperability
-----------------------------
-Purpose
-- A console project that sequentially invokes the three approaches:
-  - `TestCsToCPInvoke()` → classic P/Invoke example
-  - `TestCsToCLibraryImport()` → LibraryImport example
-  - `TestCsToCNativeAOT()` → NativeAOT example
+- `WhatCanBeDeleted.txt`  
+  Notes on temporary build folders and generated artifacts.
 
-Why it exists
-- Acts as a smoke test and usage example, showing expected build/copy steps for native assets and verifying runtime behavior.
+---
 
-TestNativeLibrary
------------------
-Purpose
-- Native/C++ test harness and helper headers for building and testing native pieces.
+## Projects in Detail
 
-How the parts interact (technical)
-=================================
-- P/Invoke:
-  - C# declares extern methods with `[DllImport("crandom.dll", ...)]`.
-  - At runtime the CLR loader locates and loads `crandom.dll`.
-  - Careful alignment of calling conventions and types is required.
+### NativeLibrary
 
-- LibraryImport:
-  - Uses the modern `LibraryImport` attribute (source-generated stubs) for lower marshaling overhead.
-  - Supports Span-based patterns: allocate stack buffers in C#, pass pointers/lengths into native code — high performance when used carefully.
+**Summary:**  
+A small .NET project compiled into a native DLL using **NativeAOT**.
 
-- NativeAOT:
-  - .NET code is AOT‑compiled to a native DLL. Exported managed methods can be called from native code via the generated entry points with `[UnmanagedCallersOnly]`.
-  - Native binaries such as `NativeLibrary.lib` can be used to link native wrappers (`cl /LD add_aot.c NativeLibrary.lib /Fe:add_aot.dll`).
+**Key points:**
 
-- Test harnesses:
-  - Test projects expect native artifacts to be present in their runtime output folder. Either copy them manually or use PostBuild events / csproj targets to place native DLLs next to the managed outputs.
+- Exported methods using  
+  `UnmanagedCallersOnly(EntryPoint = "...")`  
+  e.g. `aot_add`.
+- Built via:  
+  `dotnet publish -c Release -r win-x64`
+- Produces:
+  - native DLL (`NativeLibrary.dll`)
+  - import library (`NativeLibrary.lib`)
 
-Quickstart — Build & Run (Windows x64)
-======================================
-Prerequisites
-- .NET 10 SDK
-- Visual Studio build tools (cl, dumpbin) or full Visual Studio with x64 Native Tools
-- Windows x64 machine
+**Why it matters:**  
+Shows how C# code can be compiled into a native DLL callable from C/C++.
 
-Manual quick build
-1. Clone the repository:
+---
+
+### LanguageInteroperability/CsToC
+
+Central area for **C# → C** interoperability.
+
+#### CsToC/LibraryImport
+
+- Demonstrates modern `LibraryImport` (source generator) as an alternative to classic `DllImport`.
+- Native side: `crandom.c` → `crandom.dll` (e.g. via `cl /LD crandom.c /Fe:crandom.dll`).
+- C# side: `LibraryImport.cs` with signatures like:
+
+  ```csharp
+  [LibraryImport(CRandFile)]
+  private static partial void fill_random_lib_import(Span<byte> buffer, int length);
+  ```
+
+- Uses `Span<byte>` and `stackalloc` to avoid heap allocations.
+
+#### CsToC/NativeAOT
+
+- Shows how to:
+  - build `NativeLibrary` via NativeAOT,
+  - use the generated `NativeLibrary.lib`,
+  - create an additional native DLL (`add_aot.dll`) linking against that `.lib`.
+- Demonstrates the flow:  
+  **C# (NativeAOT) → .lib → C wrapper → DLL → back to C# or C.**
+
+---
+
+### TestLanguageInteroperability
+
+**Summary:**  
+Console test project executing all interoperability variants.
+
+- `TestCsToCPInvoke()`
+- `TestCsToCLibraryImport()`
+- `TestCsToCNativeAOT()`
+
+**Purpose:**
+
+- Smoke tests: loads native DLLs and calls functions.
+- Indirectly verifies:
+  - correct build steps,
+  - correct output folder placement,
+  - correct signatures.
+
+---
+
+### TestNativeLibrary
+
+**Summary:**  
+Native C/C++ test project linking against `NativeLibrary.lib`.
+
+**Purpose:**
+
+- Demonstrates **C → C#** via NativeAOT.
+- Shows how C code can call functions originally implemented in C#.
+
+---
+
+## How the Components Work Together
+
+- **P/Invoke (`DllImport`)**
+  - C# declares external methods.
+  - .NET runtime loads a native DLL at runtime.
+  - Parameters are automatically marshalled.
+  - Signatures, calling convention, and architecture must match.
+
+- **LibraryImport**
+  - Modern mechanism using source generators.
+  - Offers better performance and compile-time validation.
+  - Example uses `Span<byte>` + `stackalloc` for zero-allocation calls.
+
+- **NativeAOT**
+  - Compiles a .NET project ahead-of-time into a native DLL.
+  - `[UnmanagedCallersOnly]` exposes functions callable from C/C++.
+  - Also generates a `.lib` for linking from native projects.
+  - Example:  
+    `cl /LD aot_add.c NativeLibrary.lib /Fe:add_aot.dll`
+
+---
+
+## Quickstart: Build & Run (Windows x64)
+
+### Requirements
+
+- .NET 10 SDK (or the configured target framework)
+- Visual Studio / Build Tools with:
+  - `cl` (MSVC compiler)
+  - `dumpbin`
+  - “x64 Native Tools Command Prompt”
+- Windows x64
+
+### Steps (simplified)
+
+1. **Clone the repository**
+
+   ```bash
    git clone https://github.com/michelenatale/Net-Language-Interoperability.git
+   cd Net-Language-Interoperability
+   ```
 
-2. Build the native sample (crandom.dll):
-   - Open "x64 Native Tools Command Prompt"
-   - cd LanguageInteroperability\CsToC\LibraryImport
-   - cl /LD crandom.c /Fe:crandom.dll
-   - For a release-like optimized build: cl /LD /O2 /GL /Gy /DNDEBUG crandom.c /Fe:crandom.dll
+2. **Build crandom.dll (native C)**
 
-3. Build NativeLibrary (NativeAOT):
-   - cd NativeLibrary
-   - dotnet publish -c Release -r win-x64
-   - Look for artifacts in bin\x64\Release\net10.0\win-x64\publish (native DLL, .lib, possible C wrapper sources)
+   ```cmd
+   Open x64 Native Tools Command Prompt
+   cd LanguageInteroperability\CsToC\LibraryImport
+   cl /LD crandom.c /Fe:crandom.dll
+   ```
 
-4. Build and run the test harness:
-   - dotnet build TestLanguageInteroperability
-   - dotnet run --project TestLanguageInteroperability
+3. **Build NativeLibrary (NativeAOT)**
 
-Copying native artifacts
-- If the test project cannot find native DLLs, copy `crandom.dll`, `add_aot.dll`, `NativeLibrary.dll` into the test project's output directory (e.g. `bin\<cfg>\net10.0\`).
-- Alternatively automate this with the csproj snippet below.
+   ```cmd
+   cd NativeLibrary
+   dotnet publish -c Release -r win-x64
+   ```
 
-Build automation snippet (csproj)
---------------------------------
-Place this in your test project's .csproj to copy a native DLL into the managed output after build:
+4. **Build & run TestLanguageInteroperability**
 
-```xml
-<Target Name="CopyNativeLibs" AfterTargets="Build">
-  <ItemGroup>
-    <NativeFiles Include="$(SolutionDir)LanguageInteroperability\CsToC\LibraryImport\crandom.dll" Condition="Exists('$(SolutionDir)LanguageInteroperability\CsToC\LibraryImport\crandom.dll')" />
-  </ItemGroup>
-  <Copy SourceFiles="@(NativeFiles)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
-</Target>
-```
+   ```cmd
+   dotnet build TestLanguageInteroperability
+   dotnet run --project TestLanguageInteroperability
+   ```
 
-Troubleshooting & tips
-======================
-- "Dll not found" → Ensure the native DLL is in the runtime output folder beside the managed binary.
-- "BadImageFormatException" → Architecture mismatch (x86 vs x64). Use `dumpbin /headers <dll> | findstr machine` to verify (8664 = x64).
-- Prefer Path.Combine and RuntimeInformation checks over hard-coded backslashes and assumptions.
-- For debugging native code, build the native DLL with debug symbols (`/Zi`) and without aggressive optimization (`/Od` or no /O2).
-- When using `Span<byte>` and `stackalloc`, document lifetimes carefully: stack memory must not escape to native code that stores the pointer for later use.
-- If you change marshaling, ensure both managed and native signatures and calling conventions match.
+   If necessary, copy `crandom.dll`, `NativeLibrary.dll`, and `add_aot.dll` into the output folder.
 
-Suggested improvements & priorities
-==================================
-Priority 1 — High value, low effort
-- Add a comprehensive README (this file).
-- Add `.gitignore` (exclude bin/obj, .vs, etc.) and remove any committed build artifacts from history (`git rm --cached`).
-- Add PostBuild/Copy targets that place native DLLs where tests expect them.
+---
 
-Priority 2 — Medium
-- Add a Windows CI workflow (GitHub Actions) that builds native components and runs the smoke test.
-- Add CONTRIBUTING.md and issue/PR templates.
+## Troubleshooting & Tips
 
-Priority 3 — Longer term
-- Provide pre-built release assets (zipped native DLLs) to make it easier for others to try examples.
-- Add platform-specific build guides (mingw/clang for Linux/macOS) if you plan cross-platform support.
-- Expand tests to assert runtime behaviour (integrated unit/integration tests).
+- **“DllNotFoundException”**
+  - Ensure the native DLL is in the .NET output folder.
+  - Check architecture: x64 DLL for x64 .NET.
 
-Contributing & license note
-===========================
-- You indicated you are the sole copyright holder and plan to switch to MIT. If you change the LICENSE file to MIT, include the correct year and your name.
-- If others contribute, consider adding a CONTRIBUTING.md and a short CLA statement (simple contributor agreement or a requirement to accept license terms in PR description).
+- **“BadImageFormatException”**
+  - Architecture mismatch (x86/x64).
+  - Check with:  
+    `dumpbin /headers <dll> | findstr machine`  
+    (`8664` = x64)
 
-Summary / Conclusion
-====================
-Net-Language-Interoperability is a compact, well-focused learning repository that demonstrates three widely used interoperability strategies between .NET and native C: P/Invoke, LibraryImport, and NativeAOT. The examples are practical and Windows-oriented, with detailed build notes. To make the repo even more helpful and production-friendly, add a proper README (this file), a `.gitignore`, small build automation for copying native artifacts, and a CI workflow that builds and smoke-tests the examples.
+- **Path issues**
+  - Use `Path.Combine` in C#.
+  - Use build macros like `$(ProjectDir)`, `$(TargetFramework)`, `$(Configuration)`.
 
-If you’d like, I can:
-- Create a branch + PR with this README.md and a .gitignore,
-- Add a Windows GitHub Actions workflow that builds native artifacts and runs the test harness,
-- Or provide smaller incremental patches (only README or only CI).
+- **Debugging native components**
+  - Build without optimizations (`/Zi /Od`).
+  - For performance tests, enable `/O2`.
 
-Tell me which option you prefer and I’ll prepare the changes.
+---
+
+## Possible Extensions
+
+- **CI (GitHub Actions)**
+  - Automated builds on `windows-latest`.
+  - Smoke tests ensuring DLLs load correctly.
+
+- **Tests**
+  - Unit/integration tests for interop calls.
+  - ABI tests (struct layout, calling convention).
+
+- **Documentation**
+  - Shared “Interop Guidelines” (DE/EN) covering marshaling, ownership, ABI stability.
+
+- **Cross-platform**
+  - Additional examples for clang/mingw or Linux/macOS.
+
+---
+
+## License & Contributions
+
+- License: see `LICENSE` in the repository (e.g., MIT).
+- Contributions are welcome — for larger changes, consider:
+  - `CONTRIBUTING.md`
+  - Issue and pull request templates
+
+---
+
+**Summary:**  
+This repository provides a compact, practical set of examples demonstrating the three major approaches to .NET ↔ native interoperability: P/Invoke, LibraryImport, and NativeAOT — including both C# → C and C → C#.  
+The structure is designed to make the mechanisms easy to understand and reuse in your own projects.
