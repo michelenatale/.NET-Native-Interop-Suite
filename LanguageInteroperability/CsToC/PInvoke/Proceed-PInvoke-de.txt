@@ -5,17 +5,17 @@ Sicherstellen, dass die PLattform "x64" ist.
 Command Promt öffen, es muss jedoch der x64 native sein.
 >> also Windows-Startmenu und "x64 Native Tools" eingeben, dann sollte der richtige kommen.
 
-Sobald "x64 Native Tools Command Prompt for VS 2026" gestartet ist, den pfad zur cadd.c.c setzen mit cd..
+Sobald "x64 Native Tools Command Prompt for VS 2026" gestartet ist, den pfad zur cadd.c setzen mit cd..
 >> Laufwerk wechsel mit X:
 >> cd X:\[..]\NetLanguageInteroperability\LanguageInteroperability\CsToC\PInvoke
 
 Mit "dumpbin /headers cadd.dll | findstr machine" 
 >> kann geprüft werden um was für ein "Command Promt es sich handelt"
 
-Mit "cl /LD cadd.c.c /Fe:cadd.dll"
->> die cadd.c.c wird kopiliert und es wird eine cadd.dll generiert.
+Mit "cl /LD cadd.c /Fe:cadd.dll"
+>> die cadd.c wird kopiliert und es wird eine cadd.dll generiert.
 
-Auf die Frage was die cadd.c.c für ein build ist, da kann nur geantwortet werden, dass der cl-Befehle "release" nicht so kennt wie VS2026. 
+Auf die Frage was die cadd.c für ein build ist, da kann nur geantwortet werden, dass der cl-Befehle "release" nicht so kennt wie VS2026. 
 Es handelt sich aber schon um eine quasi optimiertes Build, und daher darf man sagen, dass es um ein release-ähnliches build.
 
 Sofern wirklich eine VS2026-Realease-Build verlangt wird kann auch der Befehl
@@ -31,4 +31,5 @@ Es gäbe den Befehl "cl /LD /O2 cadd.c /Fe:cadd.dll" der würde noch mehr otimie
 Für einen Debug-ähnlichen Build 
 "cl /LD /Zi /Od cadd.c /Fe:cadd.dll"
 ist jedoch eigentlich nicht notwendig, aber auch nicht falsch.
+
 
