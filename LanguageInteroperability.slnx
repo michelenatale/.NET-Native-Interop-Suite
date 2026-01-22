@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="LanguageInteroperability/LanguageInteroperability.csproj" Id="f3b6b275-0056-4d4a-ad40-a808a5ecc5de">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="NativeLibrary/NativeLibrary.csproj" Id="5cb5ea64-1d87-425b-94d0-1bdb6e7e009f">
+    <BuildType Solution="Debug|x64" Project="Release" />
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="TestLanguageInteroperability\TestLanguageInteroperability.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="TestNativeLibrary/TestNativeLibrary.vcxproj" Id="a9efcc29-0458-4851-b303-8a513c834ceb" />
+</Solution>

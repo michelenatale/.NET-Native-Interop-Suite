@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+
+    <!-- please leave it as it is -->
+    <TargetFramework>net10.0</TargetFramework>
+
+    <!-- Enable NativeAOT -->
+    <!-- NativeAOT aktivieren -->
+    <PublishAot>true</PublishAot>
+
+    <!-- Optional, aber empfohlen -->
+    <!-- Optional, but recommended -->
+    <StripSymbols>true</StripSymbols>
+    <Platforms>AnyCPU;x64</Platforms>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NativeAOT\NativeLibrary.dll" />
+    <None Remove="NativeLibrary.dll" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <!-- <PublishAot>true</PublishAot> -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net10.0</TargetFramework>
+    <StartupObject>NetLanguageInteroperability.Test.Program</StartupObject>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageInteroperability\LanguageInteroperability.csproj" />
+    <ProjectReference Include="..\NativeLibrary\NativeLibrary.csproj" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if not exist &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\CsToC\NativeAOT&quot; ( mkdir &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\CsToC\NativeAOT&quot; ) &#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\NativeLibrary\bin\x64\Release\net10.0\win-x64\native\NativeLibrary.dll&quot; ( copy /Y &quot;$(ProjectDir)..\NativeLibrary\bin\x64\Release\net10.0\win-x64\native\NativeLibrary.dll&quot; &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\CsToC\NativeAOT\NativeLibrary.dll&quot; ) &#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)..\NativeLibrary\bin\x64\Release\net10.0\win-x64\native\add_aot.dll&quot; ( copy /Y &quot;$(ProjectDir)..\NativeLibrary\bin\x64\Release\net10.0\win-x64\native\add_aot.dll&quot; &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\CsToC\NativeAOT\add_aot.dll&quot; )" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if exist &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\NativeLibrary.pdb&quot; ( del /F /Q &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\NativeLibrary.pdb&quot; ) &#xD;&#xA;&#xD;&#xA;if exist &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\NativeLibrary.dll&quot; ( del /F /Q &quot;$(ProjectDir)bin\x64\$(Configuration)\$(TargetFramework)\NativeLibrary.dll&quot; )" />
+  </Target>
+
+</Project>

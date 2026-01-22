@@ -1,0 +1,88 @@
+﻿C# → C (NativeAOT)
+
+C#‑Code (Library.cs)
+********************
+
+Ein Projekt mit dem Name 'NativeLibrary' erstellen.
+Dine Datei 'Library.cs' erzeugen.
+
+public static class NativeExports
+{
+  [UnmanagedCallersOnly(EntryPoint = "aot_add")] 
+  public static int Add(int a, int b) => a + b;
+}
+
+
+NativeLibrary.csproj - xml
+**************************
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+
+    <!-- please leave it as it is -->
+    <TargetFramework>net10.0</TargetFramework>
+
+    <!-- Enable NativeAOT -->
+    <!-- NativeAOT aktivieren -->
+    <PublishAot>true</PublishAot>
+
+    <!-- Optional, aber empfohlen -->
+    <!-- Optional, but recommended -->
+    <StripSymbols>true</StripSymbols>
+    <Platforms>AnyCPU;x64</Platforms>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NativeAOT\NativeLibrary.dll" />
+    <None Remove="NativeLibrary.dll" />
+  </ItemGroup>
+
+</Project>
+
+**********************************************************
+**********************************************************
+**********************************************************
+
+Kompilieren zu einer Nativen Build
+**********************************
+
+
+Sicherstellen, dass die PLattform "x64" ist.
+
+Command Promt öffen, es muss jedoch der x64 native sein.
+>> also Windows-Startmenu und "x64 Native Tools" eingeben, dann sollte der richtige kommen.
+
+Den Pfad des Command Promt dort hin setzen wo die Datei "NativeLibrary.csproj" ist.
+>> x:\[..]\NetLanguageInteroperability\NativeLibrary\NativeLibrary.csproj
+
+Den Befehl "dotnet publish -c Release -r win-x64" ausführen.
+
+*** WICHTIG **********************************************************
+Wichtig die native Dlls befinden sich nun in den Ordner 
+x:[..]\NetLanguageInteroperability\NativeLibrary\\bin\x64\Release\net10.0\win-x64\publish
+x:[..]\NetLanguageInteroperability\NativeLibrary\\bin\x64\Release\net10.0\win-x64\native
+
+Und nur diese Ordner enthalten die native DLL's
+
+Es werden die Dateien 'NativeLibrary.lib' und 'aot_add.c' gebraucht,
+damit eine aot_add.dll generiert werden kann. Hierzu siehe in die 
+Datei 'Proceed-NativeAOT.txt'
+
+
+Sofern geprüft werden will ob NativeLibrary.dll nativ ist 
+den Command Promt zum Pfad dieser Datei folgenden Befehl ausführen:
+"dumpbin /headers NativeLibrary.dll | findstr machine"
+
+
+ist die Ausgabe irgednwie so, ist es eine native Dll
+findstr machine
+    8664 machine (x64)
