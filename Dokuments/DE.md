@@ -13,6 +13,24 @@ Dieses Repository zeigt die Mechanismen klar und nachvollziehbar — kein Framew
 
 ---
 
+## Inhaltsverzeichnis
+
+- [Quickstart](#quickstart-windows-x64)
+- [Architekturüberblick](#architekturüberblick)
+- [Welche Technik wofür](#welche-technik-wofür)
+- [Projektstruktur](#projektstruktur)
+- [Code-Beispiele](#codebeispiele)
+  - [P/Invoke](#-pinvoke)
+  - [LibraryImport](#-libraryimport)
+  - [NativeAOT Export](#-nativeaot-export)
+  - [C ruft NativeAOT auf](#-c-ruft-nativeaot-auf)
+- [Troubleshooting](#troubleshooting)
+- [Lizenz  Beiträge](#lizenz--beiträge)
+- [Zusammenfassung](#zusammenfassung)
+
+
+---
+
 ## Quickstart (Windows x64)
 
 ### 1. Repository klonen
@@ -154,6 +172,11 @@ Beiträge willkommen.
 
 ---
 
-**Kurzfassung:**  
-Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispielen, das die drei wichtigsten Wege der .NET ↔ native Interoperabilität demonstriert: P/Invoke, LibraryImport und NativeAOT – inklusive C# → C und C → C#.  
+## Zusammenfassung
+
+Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispielen, das die drei wichtigsten Wege der .NET ↔ native Interoperabilität demonstriert: 
+- P/Invoke
+- LibraryImport
+- NativeAOT - Inklusive C# → C und C → C#.
+
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
