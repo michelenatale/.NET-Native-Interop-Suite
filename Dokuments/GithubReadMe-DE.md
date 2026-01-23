@@ -1,5 +1,10 @@
 # Net-Language-Interoperability
 
+---
+> [!IMPORTANT]
+> ***Attention:*** The entire project is still in progress and is not yet complete.
+---
+
 **[English-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/README.md)**
 
 Kompakte Beispiele, wie .NET (C#) mit nativen Bibliotheken (C/C++) interagiert — mit:
@@ -227,3 +232,4 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 - NativeAOT - Inklusive C# → C und C → C#.
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
+
