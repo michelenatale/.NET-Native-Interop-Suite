@@ -1,6 +1,6 @@
 # Net-Language-Interoperability
 
-**[German-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Dokuments/GithubReadMe-DE.md)**
+**[German-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/GithubReadMe-DE.md)**
 
 ## Goal of the project
 
