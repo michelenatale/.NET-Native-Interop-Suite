@@ -102,6 +102,8 @@ Das gleiche auch mit dem Projekt NativeLibraryLib.
 ### 5. Build für das ganze Project 
 
 ```cmd
+dotnet sln NetLanguageInteroperability.sln add BuildAll.proj
+
 dotnet build NetLanguageInteroperability.sln
 ```
 
@@ -213,3 +215,4 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 - NativeAOT - Inklusive C# → C und C → C#.
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
+
