@@ -23,9 +23,9 @@ Das Projekt ist bewusst minimal gehalten und dient als technische Referenz für 
 ## Inhaltsverzeichnis
 
 - [Ziel des Projekts](#ziel-des-projekts)
-- [Projektstruktur](#projektstruktur-ordnerübersicht)
-- [Quickstart (Windows \& Linux)](quickstart)
-- [Architekturüberblick (C ↔ C# NativeAOT)](architekturüberblick)
+- [Projektstruktur](#projektstruktur-ordner%C3%BCbersicht)
+- [Quickstart (Windows \& Linux)](#quickstart-windows--linux)
+- [Architekturüberblick (C ↔ C# NativeAOT)](#architektur%C3%BCberblick-c--c-nativeaot)
 - [Welche Technik wofür](#welche-technik-wofür)
 - [Code-Beispiele](#codebeispiele)
   - [P/Invoke](#-pinvoke)
@@ -215,4 +215,5 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 - NativeAOT - Inklusive C# → C und C → C#.
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
+
 
