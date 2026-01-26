@@ -2,19 +2,15 @@
 
 
 
-**\[English-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/README.md)**
+**[English-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/README.md)**
 
 
 
 ## Ziel des Projekts
 
+Gemäss Wikipedia ist [LanguageInteroperability](https://en.wikipedia.org/wiki/Language\_interoperability) die Fähigkeit zweier verschiedener Programmiersprachen, nativ als Teil desselben Systems zu interagieren und auf denselben Arten von Datenstrukturen zu arbeiten.
 
-
-Gemäss Wikipedia ist \[LanguageInteroperability](https://en.wikipedia.org/wiki/Language\_interoperability) die Fähigkeit zweier verschiedener Programmiersprachen, nativ als Teil desselben Systems zu interagieren und auf denselben Arten von Datenstrukturen zu arbeiten.
-
-
-
-Dieses Projekt zeigt einfache Beispiele in .Net zur \[Interoperabilität](https://learn.microsoft.com/de-de/dotnet/standard/native-interop/) zwischen C, C++ und C# unter andem mit:
+Dieses Projekt zeigt einfache Beispiele in .Net zur [Interoperabilität](https://learn.microsoft.com/de-de/dotnet/standard/native-interop/) zwischen C, C++ und C# unter andem mit:
 - P/Invoke
 - LibraryImport
 - NativeAOT
@@ -46,7 +42,6 @@ Das Projekt ist bewusst minimal gehalten und dient als technische Referenz für 
 ## Projektstruktur (Ordnerübersicht)
 
 ```text
-
 Net-Language-Interoperability/
 │
 ├── Docs/
@@ -219,5 +214,6 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 - NativeAOT - Inklusive C# → C und C → C#.
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
+
 
 
