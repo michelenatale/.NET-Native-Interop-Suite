@@ -65,11 +65,11 @@ cd Net-Language-Interoperability
 ### 2. Publishing NativeAOT
 Publishing the NativeLibrary project via NativeAOT Build (Windows)
 ```cmd
-dotnet publish Src/NativeLibrary -c Release -r win-x64
+dotnet publish -c Release -r win-x64
 ```
 Publishing NativeLibrary via NativeAOT Build (Linux)
 ```cmd
-dotnet publish Src/NativeLibrary -c Release -r linux-x64
+dotnet publish -c Release -r linux-x64
 ```
 
 ### 3. Builds .Net Assyemblies (Windows/Linux)
