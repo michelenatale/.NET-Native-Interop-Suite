@@ -214,6 +214,16 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
 
+---
+
+## Video Mp4 - Veröffentlichen, Kompilieren and Ausführen
+
+[publish-compile-execute.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/publish-compile-execute_14.mp4) 
+
+---
+
+
+
 
 
 
