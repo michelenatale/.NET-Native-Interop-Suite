@@ -33,6 +33,7 @@ The project is deliberately kept minimal and serves as a technical reference for
 - [Troubleshooting](#troubleshooting)
 - [License  Contributions](#license--contributions)
 - [Summary](#summary)
+- [Media](#video-mp4---publish-compile-and-execure)
 ---
 
 ## Project structure (folder overview)
