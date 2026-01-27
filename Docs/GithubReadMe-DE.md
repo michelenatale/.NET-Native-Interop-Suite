@@ -71,12 +71,12 @@ cd Net-Language-Interoperability
 
 Veröffentlichen des Projektes NativeLibrary über NativeAOT Build (Windows)
 ```cmd
-dotnet publish Src/NativeLibrary -c Release -r win-x64
+dotnet publish -c Release -r win-x64
 ```
 
 Veröffentlichen von NativeLibrary über NativeAOT Build (Linux)
 ```cmd
-dotnet publish Src/NativeLibrary -c Release -r linux-x64
+dotnet publish -c Release -r linux-x64
 ```
 
 ### 3. Builds .Net Assyemblies (Windows/Linux)
@@ -213,6 +213,7 @@ Dieses Repository ist ein bewusst kompaktes, praxisorientiertes Set von Beispiel
 - NativeAOT
 
 Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eigene Projekte übertragen kann.
+
 
 
 
