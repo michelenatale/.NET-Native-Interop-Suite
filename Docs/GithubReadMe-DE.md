@@ -35,7 +35,7 @@ Das Projekt ist bewusst minimal gehalten und dient als technische Referenz für 
 - [Troubleshooting](#troubleshooting)
 - [Lizenz  Beiträge](#lizenz--beiträge)
 - [Zusammenfassung](#zusammenfassung)
-- [Medien](#video-mp4---ver%C3%B6ffentlichen-kompilieren-and-ausf%C3%BChren)
+- [Medien](#video-mp4---downloads)
 
 ---
 
@@ -217,12 +217,14 @@ Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eige
 
 ---
 
-## Video Mp4 - Veröffentlichen, Kompilieren and Ausführen
+## Video Mp4 - Downloads
 
 [publish-compile-execute.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/publish-compile-execute_14.mp4) 
-[msbuid-buildall.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/msbuild-buildall_9.mp4) 
+
+[msbuid-buildall.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/msbuild-buildall_9.mp4)  
 
 ---
+
 
 
 
