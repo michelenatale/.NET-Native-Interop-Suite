@@ -7,9 +7,9 @@ Ensure that the platform is “x64.”
 Before publishing:
 ******************
 
-Target Name="CopyNativeAotOutput" must be removed from NativeLibrary.csproj 
-for the publication of the project ‘NativeLibrary’. 
-After publishing, insert it again at the very end. (see below)
+Target Name="CopyNativeAotOutput" must be removed from NativeLibrary.csproj for the publication of the project ‘NativeLibrary’. After publishing, insert it again at the very end. (see below)
+
+I hope that one of the next updates will solve this problem.
 
 <Target Name="CopyNativeAotOutput" AfterTargets="Build">
   <ItemGroup>
