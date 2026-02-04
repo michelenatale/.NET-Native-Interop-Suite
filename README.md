@@ -34,6 +34,7 @@ The project is deliberately kept minimal and serves as a technical reference for
 - [License  Contributions](#license--contributions)
 - [Summary](#summary)
 - [Media](#video-mp4---downloads)
+- [References](#references)
 ---
 
 ## Project structure (folder overview)
@@ -223,5 +224,17 @@ The structure is designed to make the mechanisms easy to understand and reuse in
 [publish-compile-execute.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/publish-compile-execute_14.mp4) 
 
 [msbuid-buildall.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/msbuild-buildall_9.mp4) 
+
+---
+
+## References
+
+[Native-Interop](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/)
+
+[Native AOT](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/)
+
+[PInvoke](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke)
+
+[Best Practice Native Interop](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/best-practices)
 
 ---
