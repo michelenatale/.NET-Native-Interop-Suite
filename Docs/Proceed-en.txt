@@ -1,8 +1,0 @@
-﻿IMPORTANT
-*********
-
-
-
-see 
-
-[...]\Src\NativeLibrary\Proceed-NativeLibrary-en.txt 
