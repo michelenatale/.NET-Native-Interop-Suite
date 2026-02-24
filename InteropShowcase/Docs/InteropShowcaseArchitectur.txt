@@ -1,0 +1,92 @@
+InteropShowcase /
+│
+├── Docs /
+│   ├── README.md
+│   ├── architecture.md 
+│   └── interop - best - practices.md
+│
+├── Managed /
+│   ├── TestInteropShowcase /
+│   │   ├── Program.cs
+│   │   ├── TestInteropShowcase.csproj
+│   │   │
+│   │   ├── Native /
+│   │   │   ├── CallBacks /
+│   │   │   │  ├── Callbacks.cs
+│   │   │   │  └── ReverseCallbacks.cs
+│   │   │   │
+│   │   │   ├── RingBuffers /
+│   │   │   │  └── RingBuffer.cs
+│   │   │   │
+│   │   │   └── VTables /
+│   │   │      ├── ManagedVTable.cs
+│   │   │      └── VTableNative.cs
+│   │   │
+│   │   └── NativeTests /
+│   │       ├── ReversePInvokeTest.cs
+│   │       ├── RingBufferTest.cs
+│   │       └── VTableTest.cs
+│   │
+│   └── TestSideCar /
+│       ├── Program.cs
+│       ├── RingBuffer.cs
+│       ├── SidecarHost.cs
+│       ├── TestSidecarModel.csproj
+│       │
+│       ├── Native /
+│       │   ├── RingBufferNative.cs
+│       │   └── SidecarNative.cs
+│       │
+│       ├── NativeTests /
+│       │   └── SidecarHostTest.cs
+│       │
+│       └── Struct /
+│           ├── SidecarHostVTable.cs
+│           └── SidecarRingBufferDesc.cs
+│
+├── Native /
+│   ├── InteropShowcaseLib /
+│   │   ├── InteropShowcaseLib.vcxproj
+│   │   ├── ringbuffer.h
+│   │   ├── ringbuffer.cpp
+│   │   ├── vtable.h
+│   │   ├── vtable.cpp
+│   │   ├── callbacks.h
+│   │   └── callbacks.cpp
+│   │ 
+│   ├── SidecarModellLib /
+│   │   ├── SidecarModellLib.vcxproj
+│   │   ├── shared_ringbuffer.h
+│   │   ├── shared_ringbuffer.cpp
+│   │   ├── sidecar_api.h
+│   │   ├── sidecar_api.cpp
+│   │   └── callbacks.cpp
+│   │
+│   └── TestSidecarModelNative /
+│       ├── TestSidecarModelNative.vcxproj 
+│       └── TestSidecarModelNative.cpp
+│
+├── Build /
+│   ├── Bin /
+│   │   ├── TestInteropShowcase /
+│   │   │   ├── InteropShowcaseLib.dll
+│   │   │   ├── TestInteropShowcase.dll
+│   │   │   ├── TestInteropShowcase.exe
+│   │   │   └── TestInteropShowcase.runtimeconfig.json
+│   │   │
+│   │   └── TestSidecarModel /
+│   │       ├── SidecarModelLib.dll
+│   │       ├── TestSidecarModel.dll
+│   │       ├── TestSidecarModel.exe
+│   │       └── TestSidecarModel.runtimeconfig.json
+│   │
+│   └── Native /
+│       ├── InteropShowcaseLib /
+│       │   ├── InteropShowcaseLib.dll
+│       │   └── InteropShowcaseLib.lib
+│       │
+│       └── SidecarModel /
+│           ├── SidecarModelLib.dll
+│           └── SidecarModelLib.lib
+│
+└── InteropShowcase.slnx

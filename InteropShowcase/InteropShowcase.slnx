@@ -1,0 +1,25 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Managed/">
+    <Project Path="Managed/TestInteropShowcase/TestInteropShowcase.csproj">
+      <BuildDependency Project="Native/InteropShowcaseLib/InteropShowcaseLib.vcxproj" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="Managed/TestSideCar/TestSidecarModel.csproj" Id="77b9ab9b-e187-47b8-a1a2-657c86c5faf3">
+      <BuildDependency Project="Native/SidecarModellLib/SidecarModellLib.vcxproj" />
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Native/">
+    <Project Path="Native/InteropShowcaseLib/InteropShowcaseLib.vcxproj" Id="24e38824-b24c-4391-8dcd-6324a9a80c20">
+      <BuildType Solution="Debug|x64" Project="Release" />
+    </Project>
+    <Project Path="Native/SidecarModellLib/SidecarModellLib.vcxproj" Id="62a133f2-7025-477a-a746-7b9d6eec2e29">
+      <BuildType Solution="Debug|x64" Project="Release" />
+    </Project>
+  </Folder>
+</Solution>
