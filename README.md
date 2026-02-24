@@ -1,34 +1,108 @@
-# .NET-Native-Interop-Suite
+# .NET Native Interop Suite
 
-## InteropShowcase
+A collection of high‑performance, real‑world examples and architectural patterns for native interoperability in .NET.  
+This suite brings together multiple projects that demonstrate how managed and unmanaged code can interact efficiently using modern .NET features such as:
 
-A comprehensive demonstration of high‑performance .NET ↔ Native interoperability using:
+- P/Invoke and LibraryImport  
+- NativeAOT  
+- Reverse P/Invoke  
+- Unmanaged function pointers (V‑Tables)  
+- Shared memory ring buffers  
+- Lock‑free cross‑process communication  
+- Sidecar worker architectures  
+
+The goal of this suite is to serve as a **technical reference**, **learning resource**, and **foundation** for developers who want to build robust and high‑performance .NET ↔ Native integrations.
+
+---
+
+## 📦 Projects in this Suite
+
+### **1. InteropShowcase**
+A comprehensive demonstration of advanced .NET ↔ Native interoperability techniques, including:
 
 - Shared memory ring buffers  
 - Reverse P/Invoke  
-- Unmanaged function pointers (V‑Tables)  
-- Lock‑free cross‑process communication  
+- Unmanaged function pointers  
+- Lock‑free IPC  
 - A fully functional Sidecar worker model  
 
-This repository contains two major components:
+🔗 https://github.com/michelenatale/.NET-Native-Interop-Suite/tree/main/InteropShowcase
 
-1. **InteropShowcase** — foundational interop examples (callbacks, V‑Tables, ring buffers)  
-2. **SidecarModel** — a production‑grade architecture for hosting a native worker thread (“Sidecar”) communicating with .NET via shared memory and reverse callbacks.
+---
 
-https://github.com/michelenatale/.NET-Native-Interop-Suite/tree/main/InteropShowcase
+### **2. NetLanguageInteroperability**
+A minimal, focused project demonstrating language interoperability between:
 
+- C  
+- C++  
+- C#  
 
-## NetLanguageInteroperability
+Using:
 
-According to Wikipedia, [LanguageInteroperability](https://en.wikipedia.org/wiki/Language_interoperability) is the ability of two different programming languages to interact natively as part of the same system and to work on the same types of data structures.
+- P/Invoke  
+- LibraryImport  
+- NativeAOT  
 
-This project shows simple examples in .Net for [interoperability](https://learn.microsoft.com/de-de/dotnet/standard/native-interop/) between C, C++, and C#, including:
-- P/Invoke
-- LibraryImport
-- NativeAOT
+This project also shows how managed C# code can be compiled into a native library and consumed from C/C++ without Visual Studio.
 
-The goal is also to demonstrate how managed C# code can be compiled as a native library and then called from native programs (focus on NativeAOT). 
+🔗 https://github.com/michelenatale/.NET-Native-Interop-Suite/tree/main/NetLanguageInteroperability
 
-The project is deliberately kept minimal and serves as a technical reference for developers who want to link C and C# code via NativeAOT without using Visual Studio.
+---
 
-https://github.com/michelenatale/.NET-Native-Interop-Suite/tree/main/NetLanguageInteroperability
+## 🧭 Purpose of the Suite
+
+The **.NET Native Interop Suite** is designed to:
+
+- Provide clear, practical examples of native interop  
+- Demonstrate modern .NET features for low‑level integration  
+- Offer architectural guidance for high‑performance systems  
+- Serve as a reference for developers building native extensions, plugins, or sidecar processes  
+- Explore advanced patterns such as shared memory IPC and reverse callbacks  
+
+Each project is intentionally kept **clean**, **minimal**, and **well‑documented** to make the concepts easy to understand and reuse.
+
+---
+
+## 📚 Documentation
+
+Each module contains its own documentation under `/Docs`, including:
+
+- Architecture overviews  
+- Interop best practices  
+- Example output  
+- Project structure  
+- Technical explanations  
+
+---
+
+## 🛠 Technologies Used
+
+- .NET 8 / .NET 9 / .NET 10
+- NativeAOT  
+- C / C++  
+- Shared memory APIs  
+- UnmanagedCallersOnly  
+- delegate* unmanaged  
+- Lock‑free data structures  
+
+---
+
+## 🤝 Contributions
+
+This suite is intended to grow over time.  
+Future modules may include:
+
+- Diagnostics tools  
+- Benchmarks  
+- Additional IPC mechanisms  
+- Native plugin architectures  
+- AOT‑optimized interop helpers  
+
+Contributions, ideas, and discussions are welcome.
+
+---
+
+## 📄 License
+
+This project is open‑source.  
+See the LICENSE file for details.
