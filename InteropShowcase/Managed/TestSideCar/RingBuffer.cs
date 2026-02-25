@@ -38,10 +38,10 @@ internal sealed unsafe class RingBuffer : IDisposable
   /// </exception>
   public RingBuffer(uint capacity, string name)
   {
-    var nameBytes = System.Text.Encoding.ASCII.GetBytes(name + "\0");
-    fixed (byte* n = nameBytes)
+    var name_bytes = System.Text.Encoding.ASCII.GetBytes(name + "\0");
+    fixed (byte* name_ptr = name_bytes)
     {
-      this.MHandle = RingBufferNative.RbCreate((sbyte*)n, capacity);
+      this.MHandle = RingBufferNative.RbCreate((sbyte*)name_ptr, capacity);
     }
 
     if (this.MHandle == IntPtr.Zero)
@@ -59,10 +59,10 @@ internal sealed unsafe class RingBuffer : IDisposable
   /// </exception>
   public RingBuffer(string name)
   {
-    var nameBytes = System.Text.Encoding.ASCII.GetBytes(name + "\0");
-    fixed (byte* n = nameBytes)
+    var name_bytes = System.Text.Encoding.ASCII.GetBytes(name + "\0");
+    fixed (byte* name_ptr = name_bytes)
     {
-      this.MHandle = RingBufferNative.RbOpen((sbyte*)n);
+      this.MHandle = RingBufferNative.RbOpen((sbyte*)name_ptr);
     }
 
     if (this.MHandle == IntPtr.Zero)
@@ -88,15 +88,15 @@ internal sealed unsafe class RingBuffer : IDisposable
   /// <summary>
   /// Reads data from the ring buffer.
   /// </summary>
-  /// <param name="destination">The buffer to receive the data.</param>
+  /// <param name="dest">The buffer to receive the data.</param>
   /// <returns>
   /// The number of bytes actually read.  
-  /// This may be less than <paramref name="destination"/> length if insufficient data is available.
+  /// This may be less than <paramref name="dest"/> length if insufficient data is available.
   /// </returns>
-  public uint Read(Span<byte> destination)
+  public uint Read(Span<byte> dest)
   {
-    fixed (byte* ptr = destination)
-      return RingBufferNative.RbRead(this.MHandle, ptr, (uint)destination.Length);
+    fixed (byte* ptr = dest)
+      return RingBufferNative.RbRead(this.MHandle, ptr, (uint)dest.Length);
   }
 
   /// <summary>

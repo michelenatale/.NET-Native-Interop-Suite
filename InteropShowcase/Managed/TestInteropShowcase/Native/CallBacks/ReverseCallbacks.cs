@@ -24,9 +24,9 @@ internal static unsafe class ReverseCallbacks
 
 
   [UnmanagedCallersOnly]
-  private static void Log(IntPtr msgPtr)
+  private static void Log(IntPtr msg_ptr)
   {
-    string msg = Marshal.PtrToStringUTF8(msgPtr)!;
+    string msg = Marshal.PtrToStringUTF8(msg_ptr)!;
     Console.WriteLine($"[Managed] Received: {msg}");
   }
 }

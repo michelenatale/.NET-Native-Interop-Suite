@@ -37,7 +37,7 @@ public static unsafe class ManagedService
   private static readonly delegate* unmanaged<byte*, void> MLogPtr = &LogImpl;
   private static readonly delegate* unmanaged<int, int, int> MAddPtr = &AddImpl;
 
-  private static ManagedServiceVTable _vtable = new()
+  private static ManagedServiceVTable MVTable = new()
   {
     Log = MLogPtr,
     Add = MAddPtr
@@ -49,7 +49,7 @@ public static unsafe class ManagedService
   /// as if they were implemented in C or C++.
   /// </summary>
   public static IntPtr VTablePtr =>
-      (IntPtr)Unsafe.AsPointer(ref _vtable);
+      (IntPtr)Unsafe.AsPointer(ref MVTable);
 
   [UnmanagedCallersOnly]
   private static void LogImpl(byte* msg)

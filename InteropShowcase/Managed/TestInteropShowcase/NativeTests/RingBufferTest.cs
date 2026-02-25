@@ -38,7 +38,7 @@ internal class RingBufferTest
   /// <summary>
   /// Starts the ring buffer interoperability test.
   /// </summary>
-  public static void Start()
+  public static void Start() 
   {
     TestRingBuffer();
   }

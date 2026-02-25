@@ -56,6 +56,7 @@ internal sealed unsafe class SidecarHost : IDisposable
 
     this.MVTable = new SidecarHostVTable
     {
+      //Funktionen mitnehmen
       Init = &InitImpl,
       Dispose = &DisposeImpl,
       Process = &ProcessImpl,
