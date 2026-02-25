@@ -1,6 +1,4 @@
-# 📘 **Interop Best Practices**
-
-## Interop Best Practices
+# Interop Best Practices
 
 This document outlines recommended patterns, guidelines, and considerations for building safe and efficient .NET ↔ Native interoperability layers.
 
