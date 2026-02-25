@@ -84,8 +84,8 @@ TestSidecarModel.exe
 
 ## 📚 Documentation
 
-- [Architecture Overview](github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/InteropShowcase/Docs/Architecture.md)
-- [Interop Best Practices](github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/InteropShowcase/Docs/Interop-Best-Practices.md)
+- [Architecture Overview](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/InteropShowcase/Docs/Architecture.md)
+- [Interop Best Practices](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/InteropShowcase/Docs/Interop-Best-Practices.md)
 
 ---
 
