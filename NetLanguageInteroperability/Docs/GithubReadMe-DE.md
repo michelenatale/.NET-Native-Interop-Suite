@@ -2,7 +2,7 @@
 
 
 
-**[English-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/README.md)**
+**[English-Version](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/README.md)**
 
 
 ## Ziel des Projekts
@@ -220,9 +220,9 @@ Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eige
 
 ## Video Mp4 - Downloads
 
-[publish-compile-execute.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/publish-compile-execute_14.mp4) 
+[publish-compile-execute.mp4](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/Docs/publish-compile-execute_14.mp4) 
 
-[msbuid-buildall.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/msbuild-buildall_9.mp4)  
+[msbuid-buildall.mp4](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/Docs/msbuild-buildall_9.mp4)  
 
 ---
 
@@ -237,6 +237,7 @@ Die Struktur ist so gewählt, dass man die Mechanismen klar erkennen und in eige
 [Best Practice Native Interop](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/best-practices)
 
 ---
+
 
 
 
