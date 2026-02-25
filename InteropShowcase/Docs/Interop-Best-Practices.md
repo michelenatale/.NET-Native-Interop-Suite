@@ -1,4 +1,4 @@
-# 📘 **3. interop-best-practices.md**
+# 📘 **Interop Best Practices**
 
 ## Interop Best Practices
 
