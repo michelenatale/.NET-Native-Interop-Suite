@@ -1,6 +1,6 @@
 # Net-Language-Interoperability
 
-**[German-Version](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/GithubReadMe-DE.md)**
+**[German-Version](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/Docs/GithubReadMe-DE.md)**
 
 ## Goal of the project
 
@@ -221,9 +221,9 @@ The structure is designed to make the mechanisms easy to understand and reuse in
 
 ## Video Mp4 - Downloads
 
-[publish-compile-execute.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/publish-compile-execute_14.mp4) 
+[publish-compile-execute.mp4](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/Docs/publish-compile-execute_14.mp4) 
 
-[msbuid-buildall.mp4](https://github.com/michelenatale/Net-Language-Interoperability/blob/main/Docs/msbuild-buildall_9.mp4) 
+[msbuid-buildall.mp4](https://github.com/michelenatale/.NET-Native-Interop-Suite/blob/main/NetLanguageInteroperability/Docs/msbuild-buildall_9.mp4) 
 
 ---
 
