@@ -99,5 +99,11 @@ This project is designed as a learning and reference resource for developers who
 
 Enjoy exploring the internals — everything is documented and intentionally transparent.
 
+---
 
+## 🔍 That could also be of interest.
+
+[C-Abi-Bridge-Aot](https://github.com/michelenatale/Cryptography/tree/main/C-Abi-Bridge-Aot)
+
+---
 
