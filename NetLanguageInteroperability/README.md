@@ -238,3 +238,10 @@ The structure is designed to make the mechanisms easy to understand and reuse in
 [Best Practice Native Interop](https://learn.microsoft.com/en-us/dotnet/standard/native-interop/best-practices)
 
 ---
+
+## 🔍 That could also be of interest.
+
+[C-Abi-Bridge-Aot](https://github.com/michelenatale/Cryptography/tree/main/C-Abi-Bridge-Aot)
+
+---
+
