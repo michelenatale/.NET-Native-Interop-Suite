@@ -102,13 +102,15 @@ Contributions, ideas, and discussions are welcome.
 
 ---
 
+## 📄 License
+
+This project is open‑source.  
+See the LICENSE file for details.
+
+---
+
 ## 🔍 That could also be of interest.
 
 [C-Abi-Bridge-Aot](https://github.com/michelenatale/Cryptography/tree/main/C-Abi-Bridge-Aot)
 
 ---
-
-## 📄 License
-
-This project is open‑source.  
-See the LICENSE file for details.
