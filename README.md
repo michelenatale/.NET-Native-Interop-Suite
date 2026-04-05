@@ -1,7 +1,7 @@
 # .NET Native Interop Suite
 
+**Status**: ✅   
 **Version**: 0.2.0   
-**Status**:     ✅   
 **Last Updated**: 2026.04.07
 
 ---
