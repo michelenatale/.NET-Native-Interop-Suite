@@ -1,5 +1,11 @@
 # .NET Native Interop Suite
 
+**Version**: 0.2.0   
+**Status**: ✅ **PRODUCTION READY**   
+**Last Updated**: 2026.04.07
+
+---
+
 A collection of high‑performance, real‑world examples and architectural patterns for native interoperability in .NET.  
 This suite brings together multiple projects that demonstrate how managed and unmanaged code can interact efficiently using modern .NET features such as:
 
