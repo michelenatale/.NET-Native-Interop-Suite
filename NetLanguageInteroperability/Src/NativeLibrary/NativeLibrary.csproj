@@ -41,9 +41,12 @@
     <PublishDir>$(ProjectDir)bin\Release\net10.0\win-x64\publish\</PublishDir>
   </PropertyGroup>
 
+ <!-- After the VS 2026 update in July 2026, uncomment PackageReference-->
+ <!--
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="10.0.2" />
   </ItemGroup>
+ -->
 
   <ItemGroup>
     <Compile Remove="bin\**" />
