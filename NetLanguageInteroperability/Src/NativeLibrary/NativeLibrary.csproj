@@ -60,14 +60,21 @@
   </ItemGroup>
 
   <Target Name="CopyNativeAotOutput" AfterTargets="Build">
+  <!-- NO LONGER NEEDS TO BE DELETED! --> 
+  <!-- NO LONGER NEEDS TO BE DELETED! -->
     <ItemGroup>
       <NativeAotDll Include="$(PublishDir)..\Native\$(TargetName).dll" />
       <NativeAotLib Include="$(PublishDir)..\Native\$(TargetName).lib" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(NativeAotDll)" DestinationFolder="$(SolutionDir)Build\Native\" SkipUnchangedFiles="true" />
+    <!--
+      <Copy SourceFiles="@(NativeAotDll)" DestinationFolder="$(SolutionDir)Build\Native\" SkipUnchangedFiles="true" />
+      <Copy SourceFiles="@(NativeAotLib)" DestinationFolder="$(SolutionDir)Build\Native\" SkipUnchangedFiles="true" />
+    -->
 
-    <Copy SourceFiles="@(NativeAotLib)" DestinationFolder="$(SolutionDir)Build\Native\" SkipUnchangedFiles="true" />
+      <Copy SourceFiles="@(NativeAotDll)" DestinationFolder="$(MSBuildThisFileDirectory)..\..\Build\Native\" SkipUnchangedFiles="true" />
+      <Copy SourceFiles="@(NativeAotLib)" DestinationFolder="$(MSBuildThisFileDirectory)..\..\Build\Native\" SkipUnchangedFiles="true" />
+
   </Target>
 
 </Project>
